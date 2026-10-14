@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenSnack - Thực Phẩm Xanh & Bánh Kẹo Healthy</title>
+    <style>
+        :root {
+            --primary: #2e7d32;
+            --primary-light: #e8f5e9;
+            --secondary: #81c784;
+            --accent: #fbc02d;
+            --text: #2c3e50;
+            --bg: #f9fbf8;
+            --white: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .btn-cta {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 0.6rem 1.4rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            transition: background 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-cta:hover {
+            background-color: #1b5e20;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-light) 0%, #c8e6c9 100%);
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #455a64;
+        }
+
+        /* Calculator Tool Section */
+        .calc-section {
+            max-width: 900px;
+            margin: -2rem auto 3rem;
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            position: relative;
+            z-index: 10;
+        }
+
+        .calc-title {
+            text-align: center;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .calc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-group label {
+            font-size: 0.9rem;
+            margin-bottom: 0.4rem;
+            font-weight: 600;
+        }
+
+        .input-group input, .input-group select {
+            padding: 0.7rem;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .calc-result {
+            background-color: var(--primary-light);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            color: var(--primary);
+            display: none;
+        }
+
+        /* Section Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 2.5rem;
+        }
+
+        /* Product Cards */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-badge {
+            background-color: var(--accent);
+            color: #333;
+            padding: 0.3rem 0.8rem;
+            font-size: 0.8rem;
+            font-weight: bold;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            border-radius: 12px;
+            z-index: 2;
+        }
+
+        .product-img {
+            height: 180px;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            position: relative;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-name {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-desc {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+
+        .product-kcal {
+            font-size: 0.85rem;
+            background: var(--primary-light);
+            color: var(--primary);
+            padding: 0.3rem 0.6rem;
+            border-radius: 5px;
+            width: fit-content;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        .product-price {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        /* Subscription Box Feature */
+        .subscription {
+            background-color: var(--white);
+            border-radius: 15px;
+            padding: 3rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .sub-list {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .sub-list li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sub-icon {
+            text-align: center;
+            font-size: 8rem;
+            background: var(--primary-light);
+            border-radius: 12px;
+            padding: 2rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1b5e20;
+            color: var(--white);
+            padding: 3rem 2rem 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-col h4 {
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .copyright {
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 1.5rem;
+            font-size: 0.85rem;
+            color: #a5d6a7;
+        }
+
+        @media (max-width: 768px) {
+            .subscription {
+                grid-template-columns: 1fr;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navbar -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">🌱 GreenSnack</div>
+            <ul class="nav-links">
+                <li><a href="#about">Giới thiệu</a></li>
+                <li><a href="#calc">Tính Kcal</a></li>
+                <li><a href="#products">Sản phẩm</a></li>
+                <li><a href="#subscription">Subscription Box</a></li>
+            </ul>
+            <a href="#products" class="btn-cta">Đặt Hàng Ngay</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="about">
+        <div class="hero-content">
+            <h1>Ăn Lành - Sống Khỏe Cùng GreenSnack</h1>
+            <p>Sàn thương mại điện tử chuyên cung cấp thực phẩm xanh, hạt dinh dưỡng chuẩn Organic và dịch vụ giao bánh healthy tận nơi theo lịch trình của bạn.</p>
+            <a href="#subscription" class="btn-cta" style="padding: 0.8rem 2rem; font-size: 1.1rem;">Khám Phá Gói Đăng Ký Định Kỳ</a>
+        </div>
+    </section>
+
+    <!-- Công cụ tính Calo & BMI -->
+    <section class="calc-section" id="calc">
+        <h2 class="calc-title">📊 Công Cụ Tính Calo Khuyến Nghị Hàng Ngày</h2>
+        <div class="calc-grid">
+            <div class="input-group">
+                <label for="weight">Cân nặng (kg)</label>
+                <input type="number" id="weight" min="20" max="200" placeholder="Ví dụ: 55">
+            </div>
+            <div class="input-group">
+                <label for="height">Chiều cao (cm)</label>
+                <input type="number" id="height" min="100" max="220" placeholder="Ví dụ: 165">
+            </div>
+            <div class="input-group">
+                <label for="goal">Mục tiêu sức khỏe</label>
+                <select id="goal">
+                    <option value="maintain">Giữ dáng / Duy trì cân nặng</option>
+                    <option value="lose">Giảm cân an toàn</option>
+                    <option value="gain">Tăng cơ / Tăng cân lành mạnh</option>
+                </select>
+            </div>
+        </div>
+        <button type="button" onclick="calculateCalo()" class="btn-cta" style="width: 100%;">Tính Nhu Cầu Calo</button>
+        <div id="calc-result" class="calc-result" style="margin-top: 1rem;"></div>
+    </section>
+
+    <!-- Sản phẩm nổi bật -->
+    <section class="container" id="products">
+        <h2 class="section-title">🥗 Sản Phẩm Healthy Bán Chạy</h2>
+        <div class="product-grid">
+            <!-- Sản phẩm 1 -->
+            <div class="product-card">
+                <div class="product-badge">Top 1</div>
+                <div class="product-img">🥣</div>
+                <div class="product-info">
+                    <div class="product-name">Granola Siêu Hạt Mật Ong (500g)</div>
+                    <div class="product-kcal">🔥 380 Kcal / 100g</div>
+                    <div class="product-desc">Thành phần gồm hạt óc chó, hạnh nhân, yến mạch nướng mật hoa dừa tự nhiên.</div>
+                    <div class="product-footer">
+                        <span class="product-price">185.000đ</span>
+                        <a href="#products" class="btn-cta" style="padding: 0.4rem 1rem; font-size: 0.85rem;">Mua ngay</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sản phẩm 2 -->
+            <div class="product-card">
+                <div class="product-img">🍪</div>
+                <div class="product-info">
+                    <div class="product-name">Bánh Thanh Ngũ Cốc Yến Mạch</div>
+                    <div class="product-kcal">🔥 120 Kcal / thanh</div>
+                    <div class="product-desc">Ăn vặt tiện lợi cho dân văn phòng, không đường tinh luyện, giàu chất xơ.</div>
+                    <div class="product-footer">
+                        <span class="product-price">120.000đ</span>
+                        <a href="#products" class="btn-cta" style="padding: 0.4rem 1rem; font-size: 0.85rem;">Mua ngay</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sản phẩm 3 -->
+            <div class="product-card">
+                <div class="product-img">🍓</div>
+                <div class="product-info">
+                    <div class="product-name">Trái Cây Sấy Lạnh Thăng Hoa</div>
+                    <div class="product-kcal">🔥 90 Kcal / gói</div>
+                    <div class="product-desc">Giữ nguyên 99% dưỡng chất từ dâu tây, xoài và chuối tươi Organic Việt Nam.</div>
+                    <div class="product-footer">
+                        <span class="product-price">95.000đ</span>
+                        <a href="#products" class="btn-cta" style="padding: 0.4rem 1rem; font-size: 0.85rem;">Mua ngay</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sản phẩm 4 -->
+            <div class="product-card">
+                <div class="product-img">🍵</div>
+                <div class="product-info">
+                    <div class="product-name">Trà Gạo Lứt Đậu Đen Dưỡng Nhan</div>
+                    <div class="product-kcal">🔥 0 Kcal</div>
+                    <div class="product-desc">Giúp thanh lọc cơ thể, hỗ trợ vóc dáng và cải thiện giấc ngủ sâu.</div>
+                    <div class="product-footer">
+                        <span class="product-price">110.000đ</span>
+                        <a href="#products" class="btn-cta" style="padding: 0.4rem 1rem; font-size: 0.85rem;">Mua ngay</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Subscription Box Feature -->
+    <section class="container" id="subscription">
+        <div class="subscription">
+            <div>
+                <h2 style="color: var(--primary); margin-bottom: 1rem;">📦 Dịch Vụ Subscription Box
+                <br><span style="font-size: 1.2rem; color: #555;">Hộp Quà Bánh Healthy Đăng Ký Định Kỳ</span></h2>
+                <p>Không còn lo lắng bị hết đồ ăn vặt healthy giữa tuần! Đăng ký 1 lần, GreenSnack tự động giao tận bàn làm việc mỗi tuần/tháng.</p>
+                <ul class="sub-list">
+                    <li>✅ Tự chọn thực đơn theo chỉ số Kcal mục tiêu</li>
+                    <li>✅ Tiết kiệm đến 20% so với mua lẻ từng món</li>
+                    <li>✅ Linh hoạt tạm dừng hoặc hủy bất kỳ lúc nào</li>
+                    <li>✅ Quà tặng bất ngờ trong mỗi hộp bánh hàng tháng</li>
+                </ul>
+                <a href="#subscription" class="btn-cta" style="background-color: var(--accent); color: #333;">Đăng Ký Gói Tuần / Tháng</a>
+            </div>
+            <div class="sub-icon">
+                🎁
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>GreenSnack Vietnam</h4>
+                <p>Sàn Thương Mại Điện Tử Phân Phối Thực Phẩm Xanh & Sản Phẩm Sức Khỏe Uy Tín.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Liên Hệ</h4>
+                <p>📍 Huế, Việt Nam</p>
+                <p>📧 252k4160164@hce.edu.vn</p>
+                <p>📞 0369581140</p>
+            </div>
+            <div class="footer-col">
+                <h4>Cam Kết</h4>
+                <p>100% Nguyên liệu tự nhiên</p>
+                <p>Mã QR minh bạch nguồn gốc</p>
+                <p>Giao hàng nhanh trong 2h</p>
+            </div>
+        </div>
+        <div class="copyright">
+            © 2026 GreenSnack Project - Dự án Hệ Thống Thông Tin Quản Lý (HTTTQL)
+        </div>
+    </footer>
+
+    <script>
+        function calculateCalo() {
+            const w = parseFloat(document.getElementById('weight').value);
+            const h = parseFloat(document.getElementById('height').value);
+            const goal = document.getElementById('goal').value;
+            const res = document.getElementById('calc-result');
+
+            if (isNaN(w) || isNaN(h) || w <= 0 || h <= 0) {
+                res.style.display = 'block';
+                res.innerHTML = 'Vui lòng nhập chiều cao và cân nặng hợp lệ!';
+                res.style.backgroundColor = '#ffebee';
+                res.style.color = '#c62828';
+                return;
+            }
+
+            // Tính BMR đơn giản theo công thức Mifflin-St Jeor
+            let baseCalo = (10 * w) + (6.25 * h) + 400;
+            if (goal === 'lose') baseCalo -= 300;
+            if (goal === 'gain') baseCalo += 300;
+
+            res.style.display = 'block';
+            res.style.backgroundColor = 'var(--primary-light)';
+            res.style.color = 'var(--primary)';
+            res.innerHTML = `Nhu cầu năng lượng hàng ngày của bạn: ~<b>${Math.round(baseCalo)} Kcal</b>.<br>Gợi ý: Sử dụng 1-2 thanh ngũ cốc GreenSnack cho bữa phụ!`;
+        }
+    </script>
+</body>
+</html>
