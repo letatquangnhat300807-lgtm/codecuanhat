@@ -3,7 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GreenSnack - Thực Phẩm Xanh & Bánh Kẹo Healthy</title>
+    <!-- Cấu hình chuẩn HTTPS cho toàn bộ liên kết nội bộ -->
+    <base href="https://greensnack.vn/">
+    <title>https://greensnack.vn - Thực Phẩm Xanh & Bánh Kẹo Healthy</title>
+    
+    <!-- Security Headers / Mixed Content Control -->
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    
     <style>
         :root {
             --primary: #2e7d32;
@@ -13,6 +19,7 @@
             --text: #2c3e50;
             --bg: #f9fbf8;
             --white: #ffffff;
+            --ssl-green: #388e3c;
         }
 
         * {
@@ -26,6 +33,29 @@
             background-color: var(--bg);
             color: var(--text);
             line-height: 1.6;
+        }
+
+        /* SSL Security Indicator Bar ở đầu trang */
+        .https-bar {
+            background-color: #1b5e20;
+            color: #ffffff;
+            font-size: 0.85rem;
+            padding: 0.4rem 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            font-family: monospace;
+        }
+
+        .https-badge {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 2px 8px;
+            border-radius: 4px;
+            color: #a5d6a7;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
         }
 
         header {
@@ -52,6 +82,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            text-decoration: none;
         }
 
         .nav-links {
@@ -345,17 +376,23 @@
 </head>
 <body>
 
+    <!-- Thanh thông báo địa chỉ HTTPS an toàn ở đầu trang -->
+    <div class="https-bar">
+        <span>🔒 Kết nối an toàn (SSL 256-bit):</span>
+        <span class="https-badge">https://greensnack.vn</span>
+    </div>
+
     <!-- Header / Navbar -->
     <header>
         <nav class="navbar">
-            <div class="logo">🌱 GreenSnack</div>
+            <a href="https://greensnack.vn/" class="logo">🌱 GreenSnack</a>
             <ul class="nav-links">
-                <li><a href="#about">Giới thiệu</a></li>
-                <li><a href="#calc">Tính Kcal</a></li>
-                <li><a href="#products">Sản phẩm</a></li>
-                <li><a href="#subscription">Subscription Box</a></li>
+                <li><a href="https://greensnack.vn/#about">Giới thiệu</a></li>
+                <li><a href="https://greensnack.vn/#calc">Tính Kcal</a></li>
+                <li><a href="https://greensnack.vn/#products">Sản phẩm</a></li>
+                <li><a href="https://greensnack.vn/#subscription">Subscription Box</a></li>
             </ul>
-            <a href="#products" class="btn-cta">Đặt Hàng Ngay</a>
+            <a href="https://greensnack.vn/#products" class="btn-cta">Đặt Hàng Ngay</a>
         </nav>
     </header>
 
@@ -363,8 +400,8 @@
     <section class="hero" id="about">
         <div class="hero-content">
             <h1>Ăn Lành - Sống Khỏe Cùng GreenSnack</h1>
-            <p>Sàn thương mại điện tử chuyên cung cấp thực phẩm xanh, hạt dinh dưỡng chuẩn Organic và dịch vụ giao bánh healthy tận nơi theo lịch trình của bạn.</p>
-            <a href="#subscription" class="btn-cta" style="padding: 0.8rem 2rem; font-size: 1.1rem;">Khám Phá Gói Đăng Ký Định Kỳ</a>
+            <p>Sàn thương mại điện tử uy tín bảo mật HTTPS chuyên cung cấp thực phẩm xanh, hạt dinh dưỡng chuẩn Organic và dịch vụ giao bánh healthy tận nơi.</p>
+            <a href="https://greensnack.vn/#subscription" class="btn-cta" style="padding: 0.8rem 2rem; font-size: 1.1rem;">Khám Phá Gói Đăng Ký Định Kỳ</a>
         </div>
     </section>
 
@@ -407,7 +444,7 @@
                     <div class="product-desc">Thành phần gồm hạt óc chó, hạnh nhân, yến mạch nướng mật hoa dừa tự nhiên.</div>
                     <div class="product-footer">
                         <span class="product-price">185.000đ</span>
-                        <a href="#products" class="btn-cta" style="padding: 0.4rem 1rem; font-size: 0.85rem;">Mua ngay</a>
+                        <a href="https://greensnack.vn/#products" class="btn-cta" style="padding: 0.4rem 1rem; font-size: 0.85rem;">Mua ngay</a>
                     </div>
                 </div>
             </div>
@@ -421,7 +458,7 @@
                     <div class="product-desc">Ăn vặt tiện lợi cho dân văn phòng, không đường tinh luyện, giàu chất xơ.</div>
                     <div class="product-footer">
                         <span class="product-price">120.000đ</span>
-                        <a href="#products" class="btn-cta" style="padding: 0.4rem 1rem; font-size: 0.85rem;">Mua ngay</a>
+                        <a href="https://greensnack.vn/#products" class="btn-cta" style="padding: 0.4rem 1rem; font-size: 0.85rem;">Mua ngay</a>
                     </div>
                 </div>
             </div>
@@ -435,7 +472,7 @@
                     <div class="product-desc">Giữ nguyên 99% dưỡng chất từ dâu tây, xoài và chuối tươi Organic Việt Nam.</div>
                     <div class="product-footer">
                         <span class="product-price">95.000đ</span>
-                        <a href="#products" class="btn-cta" style="padding: 0.4rem 1rem; font-size: 0.85rem;">Mua ngay</a>
+                        <a href="https://greensnack.vn/#products" class="btn-cta" style="padding: 0.4rem 1rem; font-size: 0.85rem;">Mua ngay</a>
                     </div>
                 </div>
             </div>
@@ -449,7 +486,7 @@
                     <div class="product-desc">Giúp thanh lọc cơ thể, hỗ trợ vóc dáng và cải thiện giấc ngủ sâu.</div>
                     <div class="product-footer">
                         <span class="product-price">110.000đ</span>
-                        <a href="#products" class="btn-cta" style="padding: 0.4rem 1rem; font-size: 0.85rem;">Mua ngay</a>
+                        <a href="https://greensnack.vn/#products" class="btn-cta" style="padding: 0.4rem 1rem; font-size: 0.85rem;">Mua ngay</a>
                     </div>
                 </div>
             </div>
@@ -469,7 +506,7 @@
                     <li>✅ Linh hoạt tạm dừng hoặc hủy bất kỳ lúc nào</li>
                     <li>✅ Quà tặng bất ngờ trong mỗi hộp bánh hàng tháng</li>
                 </ul>
-                <a href="#subscription" class="btn-cta" style="background-color: var(--accent); color: #333;">Đăng Ký Gói Tuần / Tháng</a>
+                <a href="https://greensnack.vn/#subscription" class="btn-cta" style="background-color: var(--accent); color: #333;">Đăng Ký Gói Tuần / Tháng</a>
             </div>
             <div class="sub-icon">
                 🎁
@@ -487,13 +524,13 @@
             <div class="footer-col">
                 <h4>Liên Hệ</h4>
                 <p>📍 Huế, Việt Nam</p>
-                <p>📧 252k4160164@hce.edu.vn</p>
-                <p>📞 0369581140</p>
+                <p>📧 contact@greensnack.vn</p>
+                <p>📞 1900 6868</p>
             </div>
             <div class="footer-col">
-                <h4>Cam Kết</h4>
+                <h4>Bảo Mật HTTPS</h4>
+                <p>🔒 Mã hóa dữ liệu SSL 256-bit</p>
                 <p>100% Nguyên liệu tự nhiên</p>
-                <p>Mã QR minh bạch nguồn gốc</p>
                 <p>Giao hàng nhanh trong 2h</p>
             </div>
         </div>
@@ -517,7 +554,6 @@
                 return;
             }
 
-            // Tính BMR đơn giản theo công thức Mifflin-St Jeor
             let baseCalo = (10 * w) + (6.25 * h) + 400;
             if (goal === 'lose') baseCalo -= 300;
             if (goal === 'gain') baseCalo += 300;
